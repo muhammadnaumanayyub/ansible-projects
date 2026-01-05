@@ -1,0 +1,13 @@
+---
+- name: This is first play book for learning
+  hosts: ubuntu
+  become: true
+  tasks:
+  - name: install apache2 package
+    apt:
+      name: apache2
+      state: latest
+  - name: Nano installation
+    apt: 
+      name: nano
+      state: latest
