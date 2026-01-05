@@ -1,0 +1,21 @@
+[centos]
+centosvm
+
+[ubuntu]
+ubuntuservervm
+##kalivm ansible_host=172.30.45.131 ansible_user=kali ansible_become_pass=kali
+
+
+## Below ipshosts group contains 7 hosts
+#172.30.45.[2:8]
+
+
+
+
+## Below users group contans 5 hosts 
+#[users]
+#host[01:05]
+
+[all:vars]
+ansible_python_interpreter=auto_silent
+

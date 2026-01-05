@@ -1,0 +1,11 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install vsftpd on ubuntu
+      package: name=vsftpd state=latest update_cache=yes # insted of using apt module we are using package module to make it more generic
+      ignore_errors: yes # This line ensures that playbook continues even if the task fails
+      notify: start vsftpd # This line triggers the handler to start vsftpd if the task changes
+
+  handlers: # Handlers are defined here
+    - name: start vsftpd # This handler starts and enables the vsftpd service
+      service: name=vsftpd state=started enabled=yes # This handler starts and enables the vsftpd service
