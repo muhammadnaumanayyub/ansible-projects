@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: install apache2 on Ubuntu
+      apt: 
+        name: apache2 
+        state: latest
+      # Only run this if the machine is part of the Debian/Ubuntu family
+      when: ansible_os_family == "Debian"
+
+    - name: install httpd on CentOS
+      yum: 
+        name: httpd 
+        state: latest
+      # Only run this if the machine is part of the RedHat/CentOS family
+      when: ansible_os_family == "RedHat"
