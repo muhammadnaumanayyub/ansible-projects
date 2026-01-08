@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: install vsftpd on ubuntu
+      apt:
+        name: vsftpd
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+      notify: start vsftpd
+
+    - name: install vsftpd on centos
+      yum:
+        name: vsftpd
+        state: latest
+        # This fixes the 'Could not detect dnf revision' error
+        use_backend: yum 
+      when: ansible_os_family == "RedHat"
+      notify: start vsftpd
+
+  handlers:
+    - name: start vsftpd
+      service:
+        name: vsftpd
+        state: started
+        enabled: yes
